@@ -1,3 +1,4 @@
+![Screenshot](AwsCloudDiagram.drawio.png)
 Cloud Resume Build
 -------------------
   This is my resume cloud build which was built on AWS cloud platform. The pipeline starts off with github actions that runs workflows to Terraform Cloud. Terraform Cloud is in charge of running init, plan and apply of the FrontEnd and BackEnd workflows respectively. Those workflows will run when code changes are committed to either FrontEnd or Backend. 

@@ -47,8 +47,10 @@ resource "aws_s3_bucket_object" "s3_upload" {
 resource "aws_s3_bucket_public_access_block" "danzPublic" {
   bucket = aws_s3_bucket.bucketSiteName.id
 
-  block_public_acls   = false
-  block_public_policy = false
+  #block_public_acls   = false
+  #block_public_policy = false
+  block_public_acls   = true
+  block_public_policy = true
 }
 
 resource "aws_s3_bucket_policy" "danzBucketPolicy" {
@@ -60,7 +62,7 @@ data "aws_iam_policy_document" "danzPolicy" {
   statement {
     principals {
       type        = "AWS"
-      identifiers = ["*"]
+      identifiers = ["${aws_cloudfront_origin_access_identity.accessIdentity.iam_arn}"]
     }
 
     actions = [

@@ -11433,3 +11433,12 @@ section.resume-section .resume-section-content {
     padding-bottom: 5rem;
   }
 }
+
+#container{
+  max-width: auto;
+  overflow: hidden;
+}
+img{
+  width: 100%;
+  object-fit: contain;
+}

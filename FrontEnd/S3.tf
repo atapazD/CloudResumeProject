@@ -18,39 +18,38 @@ resource "aws_s3_bucket_website_configuration" "example" {
   }
 }
 
-locals {
-  website_files = fileset(path.module, "WebSiteFiles/**")
+resource "aws_s3_bucket_object" "object" {
+  bucket   = aws_s3_bucket.bucketSiteName.id
+  for_each = fileset("./WebSiteFiles/", "**")
+  key      = each.value
+  source   = "./WebSiteFiles/${each.value}"
+  content_type = coalesce(var.content_types[regex("(\\.[^.]+)$", each.value)[0]], var.default_content_type)
 
-  content_type_map = {
-    ".html" = "text/html",
-    ".css"  = "text/css",
-    ".js"   = "application/javascript",
-    ".png"  = "image/png",
+  etag = filemd5("./WebSiteFiles/${each.value}")
+  
+}
+
+variable "content_types" {
+  type = map(string)
+
+  default = {
+    ".html" = "text/html"
+    ".css"  = "text/css"
+    ".js"   = "application/javascript"
     ".jpg"  = "image/jpeg"
-    # Add more mappings as needed
+    ".ico"  = "image/png"
   }
 }
 
-resource "aws_s3_bucket_object" "s3_upload" {
-  for_each = fileset("${path.root}/WebSiteFiles", "**/*")
-
-  bucket = aws_s3_bucket.bucketSiteName.id
-  key    = each.value
-  source = "${path.root}/WebSiteFiles/${each.value}"
-
-  etag         = filemd5("${path.root}/WebSiteFiles/${each.value}")
-  content_type = lookup(local.content_type_map, regex("\\.[^.]+$", each.value), null) # if none found default to null (will result in binary/octet-stream)
+variable "default_content_type" {
+  type    = string
+  default = "application/octet-stream"
 }
-
-
-
 resource "aws_s3_bucket_public_access_block" "danzPublic" {
   bucket = aws_s3_bucket.bucketSiteName.id
 
-  #block_public_acls   = false
-  #block_public_policy = false
-  block_public_acls   = true
-  block_public_policy = true
+  block_public_acls   = false
+  block_public_policy = false
 }
 
 resource "aws_s3_bucket_policy" "danzBucketPolicy" {
@@ -59,7 +58,7 @@ resource "aws_s3_bucket_policy" "danzBucketPolicy" {
 }
 
 data "aws_iam_policy_document" "danzPolicy" {
-   statement {
+  statement {
     principals {
       type        = "AWS"
       identifiers = ["*"]

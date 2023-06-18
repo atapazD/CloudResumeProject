@@ -45,7 +45,3 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     }
   }
 }
-
-resource "aws_cloudfront_origin_access_identity" "accessIdentity" {
-  comment = "CloudFront Origin Access Identity for S3 distribution"
-}

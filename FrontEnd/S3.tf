@@ -59,10 +59,10 @@ resource "aws_s3_bucket_policy" "danzBucketPolicy" {
 }
 
 data "aws_iam_policy_document" "danzPolicy" {
-  statement {
+   statement {
     principals {
       type        = "AWS"
-      identifiers = ["${aws_cloudfront_origin_access_identity.accessIdentity.iam_arn}"]
+      identifiers = ["*"]
     }
 
     actions = [

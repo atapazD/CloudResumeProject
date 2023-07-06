@@ -44,4 +44,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
       restriction_type = "none"
     }
   }
+  custom_origin_ssl_protocols {
+    protocol_version = "TLSv1.2_2021"
+  }
 }

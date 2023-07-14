@@ -9,8 +9,8 @@ resource "aws_cloudwatch_metric_alarm" "apiMonitor" {
       value = aws_lambda_function.myFunction.arn
     }
   statistic = "Sum"
-  period    = 5
-  threshold = 10
+  period    = 60
+  threshold = 20
   alarm_actions = [
     "${aws_sns_topic.my_topic.arn}"
   ]

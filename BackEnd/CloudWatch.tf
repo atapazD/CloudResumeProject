@@ -2,7 +2,7 @@ resource "aws_cloudwatch_metric_alarm" "apiMonitor" {
   alarm_name  = "api_calls_10_or_more"
   metric_name = "ApiCallCount"
   namespace   = "AWS/Lambda"
-  evaluation_periods = 1
+  evaluation_periods = 5
   comparison_operator = "GreaterThanOrEqualToThreshold"
   dimensions ={
       name  = aws_lambda_function.myFunction.function_name

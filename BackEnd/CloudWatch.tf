@@ -1,13 +1,14 @@
 resource "aws_cloudwatch_metric_alarm" "apiMonitor" {
-  alarm_name  = "api_calls_10_or_more"
-  metric_name = "Count"
-  namespace   = "AWS/ApiGateway"
-  evaluation_periods = 1
+  alarm_name          = "api_calls_10_or_more"
+  metric_name         = "Count"
+  namespace           = "AWS/ApiGateway"
+  evaluation_periods  = 1
   comparison_operator = "GreaterThanOrEqualToThreshold"
-  dimensions ={
-      name  = aws_api_gateway_rest_api.counter.name   //This points to the name of the API
-      stage_name = aws_api_gateway_stage.stage.stage_name //This points to the name of the stage the api is being tracked from
-    }
+  unit                = "Count"
+  dimensions = {
+    name       = aws_api_gateway_rest_api.counter.name  //This points to the name of the API
+    stage_name = aws_api_gateway_stage.stage.stage_name //This points to the name of the stage the api is being tracked from
+  }
   statistic = "Sum"
   period    = 60
   threshold = 20

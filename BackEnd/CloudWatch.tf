@@ -5,8 +5,8 @@ resource "aws_cloudwatch_metric_alarm" "apiMonitor" {
   evaluation_periods = 1
   comparison_operator = "GreaterThanOrEqualToThreshold"
   dimensions ={
-      name  = aws_lambda_function.myFunction.function_name
-      value = aws_lambda_function.myFunction.arn
+      name  = aws_api_gateway_rest_api.counter.name   //This points to the name of the API
+      stage_name = aws_api_gateway_stage.stage.stage_name //This points to the name of the stage the api is being tracked from
     }
   statistic = "Sum"
   period    = 60
@@ -25,3 +25,4 @@ resource "aws_sns_topic_subscription" "emailNoti" {
   endpoint  = "dzapcloudprojects@gmail.com"
   protocol  = "email"
 }
+//The idea for this cloudwatch metric is to alert me of unusual amount of api calls in a short amount of time

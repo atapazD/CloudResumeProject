@@ -19,7 +19,7 @@ resource "aws_s3_bucket_website_configuration" "example" {
 }
 
 locals {
-  website_files = fileset(path.module, "WebSiteFiles/**")
+  website_files = fileset(path.module, "website_files/**")
 
   content_type_map = {
     ".html" = "text/html",
@@ -32,13 +32,13 @@ locals {
 }
 
 resource "aws_s3_bucket_object" "s3_upload" {
-  for_each = fileset("${path.root}/WebSiteFiles", "**/*")
+  for_each = fileset("${path.root}/website_files", "**/*")
 
   bucket = aws_s3_bucket.bucketSiteName.id
   key    = each.value
-  source = "${path.root}/WebSiteFiles/${each.value}"
+  source = "${path.root}/website_files/${each.value}"
 
-  etag         = filemd5("${path.root}/WebSiteFiles/${each.value}")
+  etag         = filemd5("${path.root}/website_files/${each.value}")
   content_type = lookup(local.content_type_map, regex("\\.[^.]+$", each.value), null) # if none found default to null (will result in binary/octet-stream)
 }
 

@@ -1,3 +1,4 @@
+#main file for production environment
 terraform {
   required_providers {
     aws = {
@@ -18,7 +19,7 @@ terraform {
     organization = "CloudResumeDZ"
 
     workspaces {
-      name = "CloudResumeFrontEnd"
+      name = "CloudResumeDev"
     }
   }
 }

@@ -23,3 +23,12 @@ terraform {
     }
   }
 }
+
+module "s3_bucket" {
+  source = "../../modules/s3"
+  bucket_name = "mydevBucket"
+  tags = {
+    Environment = "dev"
+    Project = "MyCloudResume"
+  }
+}

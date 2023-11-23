@@ -1,4 +1,4 @@
-#main file for production environment
+#main file for Dev environment
 terraform {
   required_providers {
     aws = {
@@ -25,10 +25,6 @@ terraform {
 }
 
 module "s3_bucket" {
-  source = "../../modules/s3"
-  bucket_name = "mydevBucket"
-  tags = {
-    Environment = "dev"
-    Project = "MyCloudResume"
-  }
+  source      = "../../modules/s3"
+  
 }

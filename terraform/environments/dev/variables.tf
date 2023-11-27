@@ -1,5 +1,5 @@
 #variables specific to Dev
 variable "bucketName" {
-  type        = string
+  type    = string
   default = "dev.danzresume.com"
 }

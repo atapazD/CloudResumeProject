@@ -10,8 +10,8 @@ terraform {
 
 # Configure the AWS Provider
 provider "aws" {
-  region  = "us-east-1"
-  
+  region = "us-east-1"
+
 }
 #Test
 terraform {
@@ -25,6 +25,8 @@ terraform {
 }
 
 module "s3_bucket" {
-  source      = "../../modules/s3"
-  
+  source     = "../../modules/s3"
+  bucketName = "dev-danzresume.com"
+  #this is my dev environment specific bucket name
+
 }

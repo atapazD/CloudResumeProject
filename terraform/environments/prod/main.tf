@@ -26,7 +26,8 @@ terraform {
 
 module "s3_bucket" {
   source = "../../../modules/s3"
-  bucket_name = var.siteName
+  bucket_name = "danzresume.com"
+  #prod environment bucket name
   tags = {
     Environment = "production"
     Project = "DanzResume"

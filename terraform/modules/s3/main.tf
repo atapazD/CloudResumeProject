@@ -2,7 +2,6 @@ resource "aws_s3_bucket" "bucketSiteName" {
   bucket = var.bucketName
   tags = {
     Name        = "SiteBucket"
-    Environment = "Dev"
   }
 }
 

@@ -30,3 +30,9 @@ module "s3_bucket" {
   #this is my dev environment specific bucket name
 
 }
+
+module "dynamodb" {
+  source     = "../../modules/dynamodb"
+  table_name = "dev-site-counter"
+
+}

@@ -1,5 +1,5 @@
 resource "aws_dynamodb_table" "siteCountTable" {
-  name           = "siteCounter"
+  name           = var.table_name
   billing_mode   = "PROVISIONED"
   stream_enabled = false
   hash_key       = "counter"

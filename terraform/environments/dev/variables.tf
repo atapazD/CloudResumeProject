@@ -6,5 +6,10 @@ variable "bucketName" {
 
 variable "table_name" {
   type    = string
-  default = "dev-site-counter"
+  default = "devSiteCounter"
+}
+
+variable "environment" {
+  type    = string
+  default = "dev"
 }

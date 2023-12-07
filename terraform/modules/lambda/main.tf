@@ -35,7 +35,7 @@ resource "aws_iam_role" "iam_for_lambda" {
         {
           Effect   = "Allow"
           Action   = "dynamodb:UpdateItem"
-          Resource = "${aws_dynamodb_table.siteCountTable.arn}"
+          Resource = var.dynamodb_table_arn
         }
       ]
     })
@@ -60,4 +60,11 @@ resource "aws_lambda_function" "myFunction" {
 
   runtime = "python3.7"
   handler = "lambda.lambda_handler" #the lambda. refers to the 'lambda.py resource and the lambda_handler refers to the method in the function code that processes events.
+
+  environment {
+    variables = {
+      DYNAMODB_TABLE = var.table_name
+      ENVIRONMENT = var.environment
+    }
+  }
 }

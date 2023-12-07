@@ -23,7 +23,7 @@ jobs:
 
       - name: Run Build Script
         run: |
-          API_ENDPOINT="https://dev-api.example.com" node build.js
+          API_ENDPOINT="https://dev-api.example.com" node ./scripts/build.js
         working-directory: ./scripts
         env:
           CI: true

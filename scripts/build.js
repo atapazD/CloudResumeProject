@@ -8,5 +8,5 @@ function replaceEndpoint(filePath, endpoint) {
 }
 
 const endpoint = process.env.API_ENDPOINT || 'default-endpoint';
-const filePath = path.join(__dirname, 'index.html');
+const filePath = path.join(__dirname, '../website_files/index.html'); // Adjusted path
 replaceEndpoint(filePath, endpoint);

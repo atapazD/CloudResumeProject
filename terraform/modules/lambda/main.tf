@@ -45,8 +45,8 @@ resource "aws_iam_role" "iam_for_lambda" {
 
 data "archive_file" "lambda" {
   type        = "zip"
-  source_file = "${path.module}/terraform/modules/lambda.py"
-  output_path = "${path.module}/terraform/modules/lambda_function_payload.zip"
+  source_file = "${path.module}/lambda.py"
+  output_path = "${path.module}/lambda_function_payload.zip"
 }
 
 resource "aws_lambda_function" "myFunction" {

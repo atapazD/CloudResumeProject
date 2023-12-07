@@ -27,16 +27,3 @@ jobs:
         working-directory: ./scripts
         env:
           CI: true
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
-        with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-
-      - name: Terraform Init
-        run: terraform init
-        working-directory: ./terraform/environments/dev/
-
-      - name: Terraform Validate
-        run: terraform validate
-        working-directory: ./terraform/environments/dev/

@@ -1,0 +1,46 @@
+name: 'Terraform Dev Deployment'
+
+on:
+  push:
+    branches: [ "dev" ]
+  pull_request:
+    branches: [ "dev" ]
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: development
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14' # Specify the Node.js version
+
+      - name: Run Build Script
+        run: |
+          API_ENDPOINT="https://dev-api.example.com" node build.js
+        working-directory: ./scripts
+        env:
+          CI: true
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: ./terraform/environments/dev/
+
+      - name: Terraform Plan
+        run: terraform plan -input=false
+        working-directory: ./terraform/environments/dev/
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve -input=false
+        working-directory: ./terraform/environments/dev/

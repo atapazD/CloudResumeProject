@@ -21,12 +21,6 @@ jobs:
         with:
           node-version: '16' # Specify the Node.js version
 
-      - name: Run Build Script
-        run: |
-          API_ENDPOINT="https://dev-api.example.com" node build.js
-        working-directory: ./scripts
-        env:
-          CI: true
 
     #   - name: Setup Terraform
     #     uses: hashicorp/setup-terraform@v1

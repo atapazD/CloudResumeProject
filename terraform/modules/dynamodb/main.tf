@@ -16,7 +16,9 @@ resource "aws_dynamodb_table" "siteCountTable" {
     name = "counter"
     type = "S"
   }
-
+    lifecycle {
+    ignore_changes = [read_capacity, write_capacity, tags, /* other attributes */]
+  }
 }
 
 resource "aws_dynamodb_table_item" "quantity" {
@@ -29,4 +31,5 @@ resource "aws_dynamodb_table_item" "quantity" {
     "quantity" : {"N" : "0"}
   }
   ITEM
+  
 }

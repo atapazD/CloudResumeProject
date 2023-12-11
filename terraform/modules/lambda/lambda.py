@@ -4,11 +4,13 @@ import decimal
 
 def lambda_handler(event, context):
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('siteCounter')
+    #table = dynamodb.Table('siteCounter')
+    table = os.environ.get('DYNAMODB_TABLE')
 # update counter in dynamodb table
 
     response = table.update_item(
-        TableName='siteCounter',
+        #TableName='siteCounter',
+        TableName = table,
         Key={
             'counter' : 'view-count'
         },

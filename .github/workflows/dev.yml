@@ -21,9 +21,20 @@ jobs:
         with:
           node-version: '16' # Specify the Node.js version
 
-      - name: Run Build Script
-        run: |
-          API_ENDPOINT="https://dev-api.example.com" node ./scripts/build.js
-        working-directory: ./scripts
-        env:
-          CI: true
+
+    #   - name: Setup Terraform
+    #     uses: hashicorp/setup-terraform@v1
+    #     with:
+    #       cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+    #   - name: Terraform Init
+    #     run: terraform init
+    #     working-directory: ./terraform/environments/dev/
+
+    #   - name: Terraform Plan
+    #     run: terraform plan -input=false
+    #     working-directory: ./terraform/environments/dev/
+
+    #   - name: Terraform Apply
+    #     run: terraform apply -auto-approve -input=false
+    #     working-directory: ./terraform/environments/dev/

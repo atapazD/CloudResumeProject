@@ -1,0 +1,102 @@
+resource "aws_s3_bucket" "bucketSiteName" {
+  bucket = var.bucketName
+  tags = {
+    Name        = "SiteBucket"
+  }
+}
+
+resource "aws_s3_bucket_website_configuration" "example" {
+  bucket = aws_s3_bucket.bucketSiteName.id
+
+  index_document {
+    suffix = "index.html"
+  }
+
+  error_document {
+    key = "error.html"
+  }
+}
+
+# locals {
+#   website_files = fileset(path.module, "website_files/**")
+
+#   content_type_map = {
+#     ".html" = "text/html",
+#     ".css"  = "text/css",
+#     ".js"   = "application/javascript",
+#     ".png"  = "image/png",
+#     ".jpg"  = "image/jpeg"
+#     # Add more mappings as needed
+#   }
+# }
+
+# resource "aws_s3_bucket_object" "s3_upload" {
+#   # for_each = fileset("${path.root}/website_files", "**/*")
+#   for_each = fileset("../../../website_files", "**/*")
+#   bucket = aws_s3_bucket.bucketSiteName.id
+#   key    = each.value
+#   # source = "${path.root}/website_files/${each.value}"
+#   source = "../../../website_files", "**/*"
+#   # etag         = filemd5("${path.root}/website_files/${each.value}")
+#   etag = "../../../website_files", "**/*"
+#   content_type = lookup(local.content_type_map, regex("\\.[^.]+$", each.value), null) # if none found default to null (will result in binary/octet-stream)
+# }
+
+locals {
+  website_files = fileset("../../../website_files", "**/*")
+
+  content_type_map = {
+    ".html" = "text/html",
+    ".css"  = "text/css",
+    ".js"   = "application/javascript",
+    ".png"  = "image/png",
+    ".jpg"  = "image/jpeg"
+    # Add more mappings as needed
+  }
+}
+
+resource "aws_s3_bucket_object" "s3_upload" {
+  for_each = local.website_files
+
+  bucket        = aws_s3_bucket.bucketSiteName.id
+  key           = each.value
+  source        = "../../../website_files/${each.value}"
+  etag          = filemd5("../../../website_files/${each.value}")
+  content_type  = lookup(local.content_type_map, regex("\\.[^.]+$", each.value), null)
+}
+
+
+
+
+resource "aws_s3_bucket_public_access_block" "danzPublic" {
+  bucket = aws_s3_bucket.bucketSiteName.id
+
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+}
+
+resource "aws_s3_bucket_policy" "danzBucketPolicy" {
+  bucket = aws_s3_bucket.bucketSiteName.id
+  policy = data.aws_iam_policy_document.danzPolicy.json
+}
+
+data "aws_iam_policy_document" "danzPolicy" {
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    actions = [
+      "s3:GetObject",
+    ]
+
+    resources = [
+      aws_s3_bucket.bucketSiteName.arn,
+      "${aws_s3_bucket.bucketSiteName.arn}/*",
+    ]
+  }
+}
+

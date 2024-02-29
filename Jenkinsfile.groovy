@@ -54,7 +54,7 @@ pipeline {
             steps {
                 withCredentials([awsCredentials(credentialsId: 'aws-jenkins-credentials', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     // Sync static files to S3 bucket
-                    sh 'aws s3 sync website_files/ s3://your-s3-bucket-name --delete'
+                    sh 'aws s3 sync website_files/ s3://dev-danzresume.com --delete'
                 }
             }
         }

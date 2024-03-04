@@ -39,16 +39,17 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'terraform-cloud-token', variable: 'TERRAFORM_CLOUD_TOKEN')]) {
                     script {
-                        // Configure Terraform CLI to use the Terraform Cloud token
                         writeFile file: TF_CLI_CONFIG_FILE, text: "credentials \"app.terraform.io\" { token = \"${TERRAFORM_CLOUD_TOKEN}\" }"
-                        // Initialize Terraform
-                        sh 'terraform init'
-                        // Apply Terraform configuration
-                        sh 'terraform apply -auto-approve'
+                        // Change directory to where Terraform configurations are located
+                        dir('terraform/environments/dev') {
+                            sh 'terraform init'
+                            sh 'terraform apply -auto-approve'
+                        }
                     }
                 }
             }
         }
+
 
         stage('Deploy Static Files') {
             steps {

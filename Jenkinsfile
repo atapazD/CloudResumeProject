@@ -44,6 +44,7 @@ pipeline {
                     script {
                         writeFile file: TF_CLI_CONFIG_FILE, text: "credentials \"app.terraform.io\" { token = \"${TERRAFORM_CLOUD_TOKEN}\" }"
                             sh 'pwd'
+                            sh 'ls -a'
                             sh 'cd terraform/environments/dev'
                             sh 'pwd'
                             sh 'terraform init'

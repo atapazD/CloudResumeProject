@@ -18,7 +18,7 @@ pipeline {
             steps{
                 sh 'pwd'
                 sh 'ls -a'
-                
+
             }
         }
         stage('Build') {
@@ -43,10 +43,10 @@ pipeline {
                 withCredentials([string(credentialsId: 'terraform-cloud-token', variable: 'TERRAFORM_CLOUD_TOKEN')]) {
                     script {
                         writeFile file: TF_CLI_CONFIG_FILE, text: "credentials \"app.terraform.io\" { token = \"${TERRAFORM_CLOUD_TOKEN}\" }"
-                        dir('terraform/environments/dev') {
+                            sh 'cd terraform/environments/dev'
                             sh 'terraform init'
                             sh 'terraform apply -auto-approve'
-                        }
+                        
                     }
                 }
             }

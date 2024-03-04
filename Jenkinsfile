@@ -41,10 +41,12 @@ pipeline {
                     script {
                         writeFile file: TF_CLI_CONFIG_FILE, text: "credentials \"app.terraform.io\" { token = \"${TERRAFORM_CLOUD_TOKEN}\" }"
                         // Change directory to where Terraform configurations are located
-                        dir('terraform/environments/dev') {
+                        //dir('terraform/environments/dev') 
+                        {
                             sh 'pwd'
-                            sh 'terraform init'
-                            sh 'terraform apply -auto-approve'
+                        
+                           // sh 'terraform init'
+                           // sh 'terraform apply -auto-approve'
                         }
                     }
                 }
@@ -52,15 +54,15 @@ pipeline {
         }
 
 
-        stage('Deploy Static Files') {
-            steps {
-                withCredentials([awsCredentials(credentialsId: 'aws-jenkins-credentials', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    // Sync static files to S3 bucket
-                    sh 'aws s3 sync website_files/ s3://dev-danzresume.com --delete'
-                }
-            }
-        }
-    }
+    //     stage('Deploy Static Files') {
+    //         steps {
+    //             withCredentials([awsCredentials(credentialsId: 'aws-jenkins-credentials', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+    //                 // Sync static files to S3 bucket
+    //                 sh 'aws s3 sync website_files/ s3://dev-danzresume.com --delete'
+    //             }
+    //         }
+    //     }
+    // }
     post {
         always {
             // Cleanup to ensure sensitive files are not left on the agent

@@ -43,7 +43,9 @@ pipeline {
                 withCredentials([string(credentialsId: 'terraform-cloud-token', variable: 'TERRAFORM_CLOUD_TOKEN')]) {
                     script {
                         writeFile file: TF_CLI_CONFIG_FILE, text: "credentials \"app.terraform.io\" { token = \"${TERRAFORM_CLOUD_TOKEN}\" }"
+                            sh 'pwd'
                             sh 'cd terraform/environments/dev'
+                            sh 'pwd'
                             sh 'terraform init'
                             sh 'terraform apply -auto-approve'
                         

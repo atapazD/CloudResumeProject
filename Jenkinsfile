@@ -44,11 +44,7 @@ pipeline {
                     script {
                         writeFile file: TF_CLI_CONFIG_FILE, text: "credentials \"app.terraform.io\" { token = \"${TERRAFORM_CLOUD_TOKEN}\" }"
                             sh '''
-                                pwd
-                                cd terraform/environments/
-                                pwd
-                                mv dev/ terraform/modules
-                                cd terraform/modules/dev/
+
                                 terraform init
                                 terraform apply --auto-approve
 
@@ -73,3 +69,10 @@ pipeline {
         }
     }
 }
+
+
+                                // pwd
+                                // cd terraform/environments/
+                                // pwd
+                                // mv environments/dev/
+                                // cd terraform/modules/dev/

@@ -3,5 +3,5 @@
 
 output "dev_site" {
   description = "Development site URL"
-  value       = module.s3_bucket.website_endpoint
+  value       = module.s3.website_endpoint
 }

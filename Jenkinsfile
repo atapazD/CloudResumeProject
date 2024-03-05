@@ -50,12 +50,11 @@ pipeline {
 
         stage('Deploy Static Files') {
             steps {
-                withCredentials([awsCredentials(credentialsId: 'aws-jenkins-credentials', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    sh '''
-                    pwd
-                    aws s3 sync website_files/ s3://dev-danzresume.com --delete
-                    '''
-                }
+                withCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>]) {
+                sh '''
+                    sh 'aws s3 sync website_files/ s3://dev-danzresume.com --delete'
+                '''
+            }
             }
         }
     }

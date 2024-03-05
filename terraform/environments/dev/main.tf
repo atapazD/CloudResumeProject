@@ -25,7 +25,7 @@ terraform {
 }
 
 module "s3" {
-  source     = "./modules" 
+  source     = "/terraform/modules/s3" 
   bucketName = "dev-danzresume.com"
   #this is my dev environment specific bucket name
 

@@ -14,13 +14,6 @@ pipeline {
                 ]
             }
         }
-        stage('debug'){
-            steps{
-                sh 'pwd'
-                sh 'ls -a'
-
-            }
-        }
         stage('Build') {
             steps {
                 echo "Build step (placeholder)"
@@ -69,10 +62,3 @@ pipeline {
         }
     }
 }
-
-
-                                // pwd
-                                // cd terraform/environments/
-                                // pwd
-                                // mv environments/dev/
-                                // cd terraform/modules/dev/

@@ -45,7 +45,6 @@ pipeline {
                         writeFile file: TF_CLI_CONFIG_FILE, text: "credentials \"app.terraform.io\" { token = \"${TERRAFORM_CLOUD_TOKEN}\" }"
                             sh '''
                                 cd terraform/environments/dev
-                                ls -lR ../../
                                 terraform init
                                 terraform apply --auto-approve
 

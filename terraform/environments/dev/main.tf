@@ -25,7 +25,7 @@ terraform {
 }
 
 module "s3" {
-  source     = "/terraform/modules/s3" 
+  source     = source = "git::https://github.com/atapazD/CloudResumeProject.git//terraform/modules/s3?ref=dev"
   bucketName = "dev-danzresume.com"
   #this is my dev environment specific bucket name
 

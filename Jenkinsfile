@@ -36,13 +36,11 @@ pipeline {
                 withCredentials([string(credentialsId: 'terraform-cloud-token', variable: 'TERRAFORM_CLOUD_TOKEN')]) {
                     script {
                         writeFile file: TF_CLI_CONFIG_FILE, text: "credentials \"app.terraform.io\" { token = \"${TERRAFORM_CLOUD_TOKEN}\" }"
-                            sh '''
-                                cd terraform/environments/dev
-                                terraform init
-                                terraform apply --auto-approve
-
-                            '''
-                        
+                        sh '''
+                            cd terraform/environments/dev
+                            terraform init
+                            terraform apply --auto-approve
+                        '''
                     }
                 }
             }
@@ -56,11 +54,12 @@ pipeline {
                     accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
                 ]]) {
-                        sh 'aws s3 sync website_files/ s3://dev-danzresume.com --delete'
+                    sh 'aws s3 sync website_files/ s3://dev-danzresume.com --delete'
                 }
             }
         }
-
+    }
+    
     post {
         always {
             cleanWs()

@@ -48,16 +48,19 @@ pipeline {
             }
         }
 
-        stage('Deploy Static Files') {
-            steps {
-                withCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>]) {
-                sh '''
-                    sh 'aws s3 sync website_files/ s3://dev-danzresume.com --delete'
-                '''
-            }
-            }
+stage('Deploy Static Files') {
+    steps {
+        withCredentials([[
+            $class: 'AmazonWebServicesCredentialsBinding', 
+            credentialsId: 'aws-jenkins-credentials', 
+            accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
+            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+        ]]) {
+            sh 'aws s3 sync website_files/ s3://dev-danzresume.com --delete'
         }
     }
+}
+
     post {
         always {
             cleanWs()

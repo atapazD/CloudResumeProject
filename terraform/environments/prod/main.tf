@@ -24,7 +24,7 @@ terraform {
   }
 }
 
-module "s3_bucket" {
+module "s3" {
   source = "git::https://github.com/atapazD/CloudResumeProject.git//terraform/modules/s3?ref=master"
   bucket_name = var.bucket_name
   #prod environment bucket name

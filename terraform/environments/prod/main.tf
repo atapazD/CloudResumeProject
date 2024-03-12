@@ -25,7 +25,7 @@ terraform {
 }
 
 module "s3_bucket" {
-  source = "../../../modules/s3"
+  source = "git::https://github.com/atapazD/CloudResumeProject.git//terraform/modules/s3?ref=prod"
   bucket_name = var.bucket_name
   #prod environment bucket name
   tags = {
@@ -35,30 +35,30 @@ module "s3_bucket" {
 }
 
 module "lambda" {
-  source = "../../modules/lambda"
+  source = "git::https://github.com/atapazD/CloudResumeProject.git//terraform/modules/lambda?ref=prod"
   table_name = var.table_name
   dynamodb_table_arn = module.dynamodb.dynamodb_table_arn
   environment = var.environment
 }
 
 module "dynamodb" {
-  source = "../../modules/dynamodb"
+  source = "git::https://github.com/atapazD/CloudResumeProject.git//terraform/modules/dynamodb?ref=prod"
   table_name = var.table_name
 }
 
 module "route53" {
-  source = "../../modules/route53"
+  source = "git::https://github.com/atapazD/CloudResumeProject.git//terraform/modules/route53?ref=prod"
 }
 
 module "acm" {
-  source = "../../modules/acm"
+  source = "git::https://github.com/atapazD/CloudResumeProject.git//terraform/modules/acm?ref=prod"
 }
 
 module "api_gateway" {
-  source = "../../modules/api_gateway"
+  source = "git::https://github.com/atapazD/CloudResumeProject.git//terraform/modules/api_gateway?ref=prod"
 }
 
 module "cloudfront" {
-  source = "../../modules/cloudfront"
+  source = "git::https://github.com/atapazD/CloudResumeProject.git//terraform/modules/cloudfront?ref=prod"
 }
 

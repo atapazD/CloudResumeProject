@@ -55,15 +55,15 @@ locals {
   }
 }
 
-resource "aws_s3_bucket_object" "s3_upload" {
-  for_each = local.website_files
+# resource "aws_s3_bucket_object" "s3_upload" {
+#   for_each = local.website_files
 
-  bucket        = aws_s3_bucket.bucketSiteName.id
-  key           = each.value
-  source        = "../../../website_files/${each.value}"
-  etag          = filemd5("../../../website_files/${each.value}")
-  content_type  = lookup(local.content_type_map, regex("\\.[^.]+$", each.value), null)
-}
+#   bucket        = aws_s3_bucket.bucketSiteName.id
+#   key           = each.value
+#   source        = "../../../website_files/${each.value}"
+#   etag          = filemd5("../../../website_files/${each.value}")
+#   content_type  = lookup(local.content_type_map, regex("\\.[^.]+$", each.value), null)
+# }
 
 
 

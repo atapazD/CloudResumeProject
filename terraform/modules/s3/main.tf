@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "bucketSiteName" {
-  bucket = var.bucketName
+  bucket = var.bucket_name
   tags = {
     Name        = "SiteBucket"
   }

@@ -13,3 +13,8 @@ variable "bucket_name" {
   type = string
   default = "danzresume.com"
 }
+
+variable "siteName" {
+  type = string
+  default = "danzresume.com"
+}

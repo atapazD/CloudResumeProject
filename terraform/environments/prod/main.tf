@@ -48,7 +48,7 @@ module "route53" {
 
 module "acm" {
   source = "git::https://github.com/atapazD/CloudResumeProject.git//terraform/modules/acm?ref=master"
-  siteName = var.siteName
+  domain_name = var.siteName
 }
 
 module "api_gateway" {

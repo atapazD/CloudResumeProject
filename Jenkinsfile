@@ -41,8 +41,9 @@ pipeline {
                             cd terraform/environments/prod
                             cd ..
                             pwd 
-                            mv -v prod/ ../../
+                            mv -v prod/ ../
                             cd ~/prod
+                            pwd
                             terraform init
                             terraform apply --auto-approve
                         '''

@@ -23,30 +23,30 @@ pipeline {
             }
         }
 
-        // stage('Test') {
-        //     steps {
-        //         echo "Test step (placeholder)"
-        //         // Example: sh 'npm test'
-        //     }
-        // }
+        stage('Test') {
+            steps {
+                echo "Test step (placeholder)"
+                // Example: sh 'npm test'
+            }
+        }
 
-        // stage('Terraform Init and Apply') {
-        //     environment {
-        //         TF_CLI_CONFIG_FILE = "${WORKSPACE}/.terraformrc"
-        //     }
-        //     steps {
-        //         withCredentials([string(credentialsId: 'terraform-cloud-token', variable: 'TERRAFORM_CLOUD_TOKEN')]) {
-        //             script {
-        //                 writeFile file: TF_CLI_CONFIG_FILE, text: "credentials \"app.terraform.io\" { token = \"${TERRAFORM_CLOUD_TOKEN}\" }"
-        //                 sh '''
-        //                     cd terraform/environments/prod
-        //                     terraform init
-        //                     terraform apply --auto-approve
-        //                 '''
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Terraform Init and Apply') {
+            environment {
+                TF_CLI_CONFIG_FILE = "${WORKSPACE}/.terraformrc"
+            }
+            steps {
+                withCredentials([string(credentialsId: 'terraform-cloud-token', variable: 'TERRAFORM_CLOUD_TOKEN')]) {
+                    script {
+                        writeFile file: TF_CLI_CONFIG_FILE, text: "credentials \"app.terraform.io\" { token = \"${TERRAFORM_CLOUD_TOKEN}\" }"
+                        sh '''
+                            cd terraform/environments/prod
+                            terraform init
+                            terraform apply --auto-approve
+                        '''
+                    }
+                }
+            }
+        }
 
         // stage('Deploy Static Files') {
         //     steps {

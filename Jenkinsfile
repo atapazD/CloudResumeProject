@@ -24,9 +24,9 @@ pipeline {
                     ls
                     mv -v prod ../../
                     ls
-                    cd ..
-                    cd ..
+                    cd ../../
                     pwd
+                    ls
                 '''
 
             }

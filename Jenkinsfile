@@ -20,6 +20,7 @@ pipeline {
                 // Example: sh 'npm install && npm run build'
                 sh'''
                     pwd
+                    cd terraform/environments/
                     mv -v ~/prod ../../
                     cd ~/prod
                     pwd

@@ -20,7 +20,9 @@ pipeline {
                 // Example: sh 'npm install && npm run build'
                 sh'''
                     pwd
-
+                    mv -v ~/prod ../../
+                    cd ~/prod
+                    pwd
                 '''
 
             }
@@ -42,7 +44,7 @@ pipeline {
         //             script {
         //                 writeFile file: TF_CLI_CONFIG_FILE, text: "credentials \"app.terraform.io\" { token = \"${TERRAFORM_CLOUD_TOKEN}\" }"
         //                 sh '''
-        //                     cd /prod
+        //                     
         //                     terraform init
         //                     terraform apply --auto-approve
         //                 '''

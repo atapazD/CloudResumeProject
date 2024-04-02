@@ -6,7 +6,7 @@ pipeline {
             steps {
                 checkout scm: [
                     $class: 'GitSCM',
-                    branches: [[name: '*/master']],
+                    branches: [[name: '*/7-refactor-acm-module-to-new-directory-structure']],
                     userRemoteConfigs: [[
                         url: 'git@github.com:atapazD/CloudResumeProject.git',
                         credentialsId: 'github-credentials'

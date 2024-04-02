@@ -46,18 +46,18 @@ pipeline {
             }
         }
 
-        stage('Deploy Static Files') {
-            steps {
-                withCredentials([[
-                    $class: 'AmazonWebServicesCredentialsBinding', 
-                    credentialsId: 'aws-jenkins-credentials', 
-                    accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-                ]]) {
-                    sh 'aws s3 sync website_files/ s3://prod-danzresume.com --delete'
-                }
-            }
-        }
+        // stage('Deploy Static Files') {
+        //     steps {
+        //         withCredentials([[
+        //             $class: 'AmazonWebServicesCredentialsBinding', 
+        //             credentialsId: 'aws-jenkins-credentials', 
+        //             accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
+        //             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+        //         ]]) {
+        //             sh 'aws s3 sync website_files/ s3://prod-danzresume.com --delete'
+        //         }
+        //     }
+        // }
     }
     
     post {

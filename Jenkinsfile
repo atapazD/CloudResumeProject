@@ -40,6 +40,7 @@ pipeline {
                         sh '''
                             cd terraform/environments/prod
                             cd ..
+                            pwd 
                             mv -v prod/ ../../
                             cd ~/prod
                             terraform init

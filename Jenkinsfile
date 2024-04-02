@@ -21,8 +21,10 @@ pipeline {
                 sh'''
                     pwd
                     cd terraform/environments/
+                    ls
                     mv -v /prod ../../
-                    cd /prod
+                    ls
+                    cd ~/prod
                     pwd
                 '''
 

@@ -18,8 +18,7 @@ pipeline {
             steps {
                 echo "Build step (placeholder)"
                 // Example: sh 'npm install && npm run build'
-                sh 'ls -R'
-                sh 'pwd'
+
             }
         }
 
@@ -40,6 +39,9 @@ pipeline {
                         writeFile file: TF_CLI_CONFIG_FILE, text: "credentials \"app.terraform.io\" { token = \"${TERRAFORM_CLOUD_TOKEN}\" }"
                         sh '''
                             cd terraform/environments/prod
+                            cd ..
+                            mv -v prod/ ../../../
+                            cd ~/prod
                             terraform init
                             terraform apply --auto-approve
                         '''

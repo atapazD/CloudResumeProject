@@ -50,10 +50,10 @@ pipeline {
                     script {
                         writeFile file: TF_CLI_CONFIG_FILE, text: "credentials \"app.terraform.io\" { token = \"${TERRAFORM_CLOUD_TOKEN}\" }"
                         sh '''
-                            cd prod/
+                            cd prod/modules
+                            ls
                             pwd
-                            terraform init
-                            terraform plan
+
                         '''
                     }
                 }

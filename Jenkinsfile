@@ -25,6 +25,7 @@ pipeline {
                     mv -v prod ../../
                     ls
                     cd ../../
+                    mv -v terraform/modules prod/
                     cd prod/
                     pwd
                     ls

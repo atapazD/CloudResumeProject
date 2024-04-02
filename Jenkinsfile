@@ -18,9 +18,8 @@ pipeline {
             steps {
                 echo "Build step (placeholder)"
                 // Example: sh 'npm install && npm run build'
-                sh 
-                '''
-                pwd
+                sh'''
+                    pwd
 
                 '''
 

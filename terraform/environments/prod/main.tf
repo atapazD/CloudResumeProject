@@ -48,7 +48,7 @@ terraform {
 
 module "acm" {
   //source = "git::https://github.com/atapazD/CloudResumeProject.git//terraform/modules/acm?ref=master"
-  source = "../modules/acm"
+  source = "prod/modules/acm"
   siteName = var.siteName
 }
 

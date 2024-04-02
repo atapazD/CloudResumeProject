@@ -22,7 +22,7 @@ pipeline {
                     pwd
                     cd terraform/environments/
                     ls
-                    mv -v /prod ../../
+                    mv -v prod ../../
                     ls
                     cd ~/prod
                     pwd

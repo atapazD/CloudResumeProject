@@ -25,6 +25,7 @@ pipeline {
                     mv -v prod ../../
                     ls
                     cd ../../
+                    cd prod/
                     pwd
                     ls
                 '''
@@ -49,7 +50,7 @@ pipeline {
                         writeFile file: TF_CLI_CONFIG_FILE, text: "credentials \"app.terraform.io\" { token = \"${TERRAFORM_CLOUD_TOKEN}\" }"
                         sh '''
                             terraform init
-                            terraform apply --auto-approve
+                            terraform plan
                         '''
                     }
                 }

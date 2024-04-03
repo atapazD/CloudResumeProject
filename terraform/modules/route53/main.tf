@@ -7,7 +7,7 @@ resource "aws_route53_zone" "www_primary" {
 }
 resource "aws_route53_record" "records" {
   for_each = {
-    for dvo in aws_acm_certificate.cert.domain_validation_options : dvo.domain_name => {
+    for dvo in module.aws_acm_certificate.cert.domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
       record = dvo.resource_record_value
       type   = dvo.resource_record_type
@@ -30,8 +30,8 @@ resource "aws_route53_record" "A" {
   name    = var.siteName
   type    = "A"
   alias {
-    name                   = aws_cloudfront_distribution.s3_distribution.domain_name
-    zone_id                = aws_cloudfront_distribution.s3_distribution.hosted_zone_id
+    name                   = module.aws_cloudfront_distribution.s3_distribution.domain_name
+    zone_id                = module.aws_cloudfront_distribution.s3_distribution.hosted_zone_id
     evaluate_target_health = true
   }
 

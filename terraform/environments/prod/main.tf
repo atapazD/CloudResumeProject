@@ -24,11 +24,11 @@ terraform {
   }
 }
 
-# module "s3" {
-#   source = "git::https://github.com/atapazD/CloudResumeProject.git//terraform/modules/s3?ref=master"
-#   bucket_name = var.bucket_name
-#   #prod environment bucket name
-# }
+module "s3" {
+  source = "./modules/s3"
+  bucket_name = var.bucket_name
+  #prod environment bucket name
+}
 
 # module "lambda" {
 #   source = "git::https://github.com/atapazD/CloudResumeProject.git//terraform/modules/lambda?ref=master"
@@ -52,11 +52,11 @@ module "acm" {
   siteName = var.siteName
 }
 
-# module "api_gateway" {
-#   source = "git::https://github.com/atapazD/CloudResumeProject.git//terraform/modules/api_gateway?ref=master"
-# }
+module "api_gateway" {
+  source = "./modules/api_gateway"
+}
 
-# module "cloudfront" {
-#   source = "git::https://github.com/atapazD/CloudResumeProject.git//terraform/modules/cloudfront?ref=master"
-# }
+module "cloudfront" {
+  source = "./modules/cloudfront"
+}
 

@@ -1,7 +1,7 @@
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
-    domain_name = aws_s3_bucket.bucketSiteName.bucket_regional_domain_name
-    origin_id   = aws_s3_bucket.bucketSiteName.arn
+    domain_name = module.aws_s3_bucket.bucketSiteName.bucket_regional_domain_name
+    origin_id   = module.aws_s3_bucket.bucketSiteName.arn
   }
 
   enabled             = true

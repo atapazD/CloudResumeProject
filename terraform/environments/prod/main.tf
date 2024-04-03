@@ -42,9 +42,9 @@ terraform {
 #   table_name = var.table_name
 # }
 
-# module "route53" {
-#   source = "git::https://github.com/atapazD/CloudResumeProject.git//terraform/modules/route53?ref=master"
-# }
+module "route53" {
+  source = "./modules/route53"
+}
 
 module "acm" {
   //source = "git::https://github.com/atapazD/CloudResumeProject.git//terraform/modules/acm?ref=master"
